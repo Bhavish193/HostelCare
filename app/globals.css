@@ -1,21 +1,197 @@
+
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #6254e8;
-  --color-primary-dark: #4f43cf;
-  --color-ink: #19213c;
-  --color-muted: #71809a;
-  --color-canvas: #f7f8fd;
-  --color-line: #e7eaf3;
+  --color-primary: #3b82f6;
+  --color-primary-dark: #1d4ed8;
+  --color-ink: #17243b;
+  --color-muted: #718096;
+  --color-canvas: #f3f6fa;
+  --color-line: #e2e8f0;
   --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-@layer base {
-  * { @apply box-border; }
-  html { @apply scroll-smooth; }
-  body { @apply m-0 bg-canvas font-sans text-ink antialiased; }
-  button, input, select, textarea { @apply font-[inherit]; }
-  a { @apply no-underline; }
-  button { @apply cursor-pointer; }
-  ::selection { @apply bg-primary/20; }
+:root {
+  --navy: #101c30;
+  --navy-light: #1b2c46;
+  --blue: #3b82f6;
+  --teal: #14b8a6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: #17243b;
+  font-family: var(--font-sans);
+  background: #f3f6fa;
+  -webkit-font-smoothing: antialiased;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(59, 130, 246, .2);
+}
+
+:focus-visible {
+  outline: 3px solid rgba(59, 130, 246, .4);
+  outline-offset: 3px;
+}
+
+input, select, textarea {
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, .12);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #eaf0f6;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c3cfdd;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #91a4bb;
+}
+
+@layer components {
+  .hc-card {
+    border: 1px solid #e7edf4;
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: 0 5px 22px rgba(16, 28, 48, .045);
+    transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+  }
+
+  .hc-card:hover {
+    transform: translateY(-3px);
+    border-color: #cbdcf3;
+    box-shadow: 0 15px 35px rgba(16, 28, 48, .09);
+  }
+
+  .hc-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    border-radius: 12px;
+    padding: 12px 22px;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    background: linear-gradient(110deg, #2563eb, #0d9488);
+    box-shadow: 0 7px 18px rgba(37, 99, 235, .2);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+
+  .hc-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(37, 99, 235, .28);
+  }
+
+  .hc-input {
+    width: 100%;
+    border: 1px solid #dce5ef;
+    border-radius: 11px;
+    background: #f9fbfd;
+    padding: 12px 14px;
+    color: #17243b;
+    font-size: 14px;
+  }
+
+  .hc-input:focus {
+    border-color: #3b82f6;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, .1);
+  }
+
+  .hc-eyebrow {
+    color: #2563eb;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+  }
+
+  .hc-page-title {
+    color: #17243b;
+    font-size: clamp(28px, 4vw, 38px);
+    font-weight: 850;
+    letter-spacing: -.045em;
+    line-height: 1.15;
+  }
+
+  .hc-panel {
+    border: 1px solid #e4ebf3;
+    border-radius: 20px;
+    background: white;
+    box-shadow: 0 5px 24px rgba(16, 28, 48, .045);
+  }
+
+  .hc-gradient-text {
+    background: linear-gradient(100deg, #60a5fa, #2dd4bf);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+}
+
+@keyframes hc-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hc-animate {
+  animation: hc-fade-up .6s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
 }
